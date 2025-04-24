@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z} from 'zod'
 
 export const CurrencySchema = z.object({
     code: z.string(),
@@ -26,4 +26,8 @@ export const CryptoPriceSchema = z.object({
     LOWDAY: z.string(),
     CHANGEPCT24HOUR: z.string(),
     LASTUPDATE: z.string()
+})
+
+export const CryptoPriceResponseSchema = z.object({
+    PRICE: z.number()
 })

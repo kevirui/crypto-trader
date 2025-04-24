@@ -55,6 +55,11 @@ export default function CriptoSearchForm() {
                 </select>
             </div>
 
+            <div className="field">
+                <label htmlFor="cantidad">Cantidad a convertir</label>
+                <input type="number" name="cantidad" id="cantidad" placeholder="Ingrese la cantidad a convertir "/>
+            </div>
+
             <div className='field'>
                 <label htmlFor="criptocurrency">Criptomoneda:</label>
                 <select 
@@ -73,7 +78,12 @@ export default function CriptoSearchForm() {
                 </select>
             </div>
 
-            <input type='submit' value='Cotizar' />
+            <div className="field btns">
+                <input type="submit" value="Convertir a Crypto" />
+                <input type="submit" value="Convertir a Moneda Local" />
+            </div>
+
+            <input type='submit' value='Ver Mercado' />
         </form>
     )
 }

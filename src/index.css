@@ -1,18 +1,18 @@
 :root {
-  --white: #FFF;
-  --primary: #61ECBC;
+  --white: #fff;
+  --primary: #61ecbc;
   --black: #182339;
 }
 html {
   font-size: 62.5%;
 }
 body {
-  background-image: url('/bg.jpg');
+  background-image: url("/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 2rem;
 }
 .container {
@@ -24,7 +24,7 @@ body {
   font-size: 3.8rem;
   margin-top: 5rem;
   color: var(--white);
-  line-height: .8;
+  line-height: 0.8;
 }
 .app-title span {
   display: block;
@@ -48,13 +48,30 @@ body {
 .form label {
   color: var(--black);
 }
+
+#cantidad {
+  color: var(--black);
+  border: none;
+  background-color: #ecebeb;
+  border-radius: 10px;
+  padding: 10px 25px;
+  max-width: 190px;
+}
+
 .form select {
-  background-color: #ECEBEB;
+  background-color: #ecebeb;
   border: none;
   padding: 1rem;
   border-radius: 1rem;
   font-size: 1.8rem;
 }
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 .form [type="submit"] {
   background-color: var(--primary);
   color: var(--black);
@@ -67,7 +84,7 @@ body {
   transition: background-color 300ms ease;
 }
 .form [type="submit"]:hover {
-  background-color: #0CB387;
+  background-color: #0cb387;
 }
 
 .result-wrapper {
