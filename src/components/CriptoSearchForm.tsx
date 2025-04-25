@@ -1,6 +1,6 @@
 import { useCryptoStore } from "../store"
 import { currencies } from "../data"
-import { ChangeEvent, FormEvent, useMemo, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { Pair } from "../types"
 import ErrorMessage from "./ErrorMessage"
 import Spinner from "./Spinner"
