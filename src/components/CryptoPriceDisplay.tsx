@@ -6,10 +6,11 @@ export default function CryptoPriceDisplay() {
 
     const result = useCryptoStore((state) => state.result)
     const loading = useCryptoStore((state) => state.loading)
-    const hasResult = useMemo(() => !Object.values(result).includes('') , [result])
+    const hasResult = useMemo(() => !Object.values(result).includes(''), [result])
+
     return (
         <div className="result-wrapper">
-            {loading ? <Spinner /> : hasResult && (
+            {loading ? <Spinner /> : (hasResult) && (
                 <>
                     <h2>Cotización</h2>
                     <div className="result">
@@ -18,6 +19,7 @@ export default function CryptoPriceDisplay() {
                             alt="Imagen Cryptomoneda"
                         />
                         <div>
+                            
                             <p>El precio es de: <span>{result.PRICE}</span></p>
                             <p>Precio más alto del día: <span>{result.HIGHDAY}</span></p>
                             <p>Precio más bajo del día: <span>{result.LOWDAY}</span></p>

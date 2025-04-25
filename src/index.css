@@ -49,13 +49,12 @@ body {
   color: var(--black);
 }
 
-#cantidad {
+#price {
   color: var(--black);
-  border: none;
   background-color: #ecebeb;
-  border-radius: 10px;
-  padding: 10px 25px;
-  max-width: 190px;
+  border-radius: 1rem;
+  padding: 1rem 2.5rem;
+  max-width: 19rem;
 }
 
 .form select {
@@ -66,13 +65,8 @@ body {
   font-size: 1.8rem;
 }
 
-.btns {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.form [type="submit"] {
+.form [type="submit"],
+.form [type="button"] {
   background-color: var(--primary);
   color: var(--black);
   border: none;

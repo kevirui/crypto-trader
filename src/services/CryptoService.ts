@@ -18,14 +18,9 @@ export async function fetchCurrentCryptoPrice(pair: Pair) {
     const result = CryptoPriceSchema.safeParse(DISPLAY[pair.criptocurrency][pair.currency])
     const resultRaw = CryptoPriceResponseSchema.safeParse(RAW[pair.criptocurrency][pair.currency])
 
-    if (resultRaw.success) {
-        return resultRaw.data.PRICE
-    } else {
-        console.error('Failed to parse RAW data:', resultRaw.error)
-    }
- 
-    if(result.success ) {
-        return result.data
-    }
+    return {
+            rawPrice: resultRaw.success ? resultRaw.data.PRICE : null,
+            displayData: result.success ? result.data : null
+        }
     
 }

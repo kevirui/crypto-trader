@@ -5,7 +5,7 @@ Una plataforma web desarrollada con **React** que permite al usuario consultar e
 ## 🚀 Características
 
 - Selección de criptomoneda y moneda local.
-- Consulta de cotización en tiempo real.
+- Ingreso de monto y consulta de cotización en tiempo real.
 - Validación de formularios con **Zod**.
 - Estado global manejado con **Zustand**.
 - Consumo de datos desde una API de criptomonedas.
@@ -42,11 +42,6 @@ src/
 ├── App.jsx
 ├── main.jsx
 ```
-
-## ✅ TODO 
-- Agregar input y label para cotizar un monto.
-
-- Gráficas interactivas.
 
 ## 📄 Licencia
 Este proyecto está bajo la licencia MIT. Podés usarlo y modificarlo libremente.

@@ -1,36 +1,57 @@
 import { useCryptoStore } from "../store"
 import { currencies } from "../data"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useMemo, useState } from "react"
 import { Pair } from "../types"
 import ErrorMessage from "./ErrorMessage"
+import Spinner from "./Spinner"
 
 export default function CriptoSearchForm() {
     const cryptocurrencies = useCryptoStore((state) => state.cryptocurrencies)
     const fetchData = useCryptoStore((state) => state.fetchData)
-
+    const cryptoPrice = useCryptoStore((state) => state.rawPrice)
+    const loading = useCryptoStore((state) => state.loading)
+    
     const [pair, setPair] = useState<Pair>({
         currency: '',
-        criptocurrency: ''
+        criptocurrency: '',
+        price: 0
     })
+
     const [error, setError] = useState('')
+
+    const precio = Math.round(cryptoPrice * pair.price)
+    const precioFormateado = precio.toLocaleString('es-AR', {
+         minimumFractionDigits: 2, // Número mínimo de decimales
+         maximumFractionDigits: 2, // Número máximo de decimales
+         useGrouping: true, // Usar separador de miles
+    })
+
+    const [showPrices, setShowPrices] = useState(false)
     
-    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        setPair({
-            ...pair,
-            [e.target.name]: e.target.value
-        })
+    const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+        const { name, value } = e.target
+        setPair((prev) => ({
+            ...prev,
+            [name]: name === 'price' ? parseFloat(value) || 0 : value // Convertir a 'price' a número
+        }))
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if(Object.values(pair).includes('')) {
+    const validateFields = () => {
+        if (Object.values(pair).includes('')) {
             setError('Todos los campos son obligatorios')
-            return
+            return false
         }
         setError('')
-        fetchData(pair)
+        return true
     }
 
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (validateFields()) {
+            fetchData(pair)
+            setShowPrices(true)
+        }
+    }
 
     return (
         <form
@@ -55,11 +76,6 @@ export default function CriptoSearchForm() {
                 </select>
             </div>
 
-            <div className="field">
-                <label htmlFor="cantidad">Cantidad a convertir</label>
-                <input type="number" name="cantidad" id="cantidad" placeholder="Ingrese la cantidad a convertir "/>
-            </div>
-
             <div className='field'>
                 <label htmlFor="criptocurrency">Criptomoneda:</label>
                 <select 
@@ -78,12 +94,21 @@ export default function CriptoSearchForm() {
                 </select>
             </div>
 
-            <div className="field btns">
-                <input type="submit" value="Convertir a Crypto" />
-                <input type="submit" value="Convertir a Moneda Local" />
+            <div className="field">
+                <label htmlFor="price">Cantidad a convertir</label>
+                <p>$ <input type="number" name="price" id="price" placeholder="Cantidad: " min="1" onChange={handleChange} value={pair.price} /></p>
             </div>
+            
+            {loading ? <Spinner /> : (showPrices) && (
+                <div className="field">
+                    <div className="form">
+                        <p>El precio en {pair.currency} es: <span>${ precioFormateado }</span></p>
+                        <p>El precio en {pair.criptocurrency} es: <span>${ (pair.price / cryptoPrice) }</span></p>
+                    </div>
+                </div>
+            )}
 
-            <input type='submit' value='Ver Mercado' />
+            <input type='submit' value='Cotizar' />
         </form>
     )
 }
